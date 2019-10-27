@@ -7,7 +7,7 @@
     <string name="door_c">Porte C</string>
 
     <!-- StartActivity -->
-    <string name="title_start_page">Une voiture est cachée derrière une de ces portes. Trouves la !</string>
+    <string name="title_start_page">Une Jeep Renegade est cachée derrière une de ces portes. Trouve la !</string>
     <string name="button_a_propos">En savoir plus sur le problème de Monty Hall</string>
     <string name="wikipedia_monty_hall">https://fr.wikipedia.org/wiki/Probl%C3%A8me_de_Monty_Hall</string>
 
@@ -16,6 +16,9 @@
 
     <!-- ResultActivity -->
     <string name="result_replay">Rejouer</string>
+    <string name="win_message">Bravo ! Tu as gagné une Jeep Renegade</string>
+    <string name="lose_message">Et non, c\'est perdu. Dommage !</string>
+    <string name="choice">choice</string>
 
     <dimen name="title_size">20sp</dimen>
 </resources>

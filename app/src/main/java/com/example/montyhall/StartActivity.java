@@ -23,17 +23,22 @@ public class StartActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        //permet de redéfinir la porte gagnante à chaque début de l'activité
+        // permet de redéfinir la porte gagnante à chaque début de l'activité
         MontyHallApplication application = (MontyHallApplication) getApplication();
         application.setWinningDoor();
     }
 
+    /**
+     * Action du clic sur une porte, lance la deuxième vue
+     *
+     * @param view le bouton cliqué
+     */
     public void onDoorSelection(View view) {
         ImageButton porte = (ImageButton) view;
         String porteChoisie = porte.getTag().toString();
 
         Intent intent = new Intent(this, ChoiceActivity.class);
-        intent.putExtra("porte_choisie", Integer.valueOf(porteChoisie));
+        intent.putExtra(getString(R.string.choice), Integer.valueOf(porteChoisie));
         startActivity(intent);
         finish();
     }

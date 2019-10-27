@@ -2,17 +2,13 @@ package com.example.montyhall;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,29 +26,52 @@ public class ChoiceActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        int choosenDoor = getIntent().getIntExtra("porte_choisie", 0);
+        // récupération du choix de l'utilisateur
+        int choosenDoor = getIntent().getIntExtra(getString(R.string.choice), 0);
 
+        // calcul des portes à garder
         MontyHallApplication application = (MontyHallApplication) getApplication();
         List<Integer> doors = application.getDoors(choosenDoor);
+        Collections.sort(doors); // pour afficher les portes dans le bon ordre
 
-        TextView firstDoorText = findViewById(R.id.first_door_text);
-        ImageButton firstDoor = findViewById(R.id.first_door);
-        firstDoor.setTag(doors.get(0));
-        firstDoorText.setText(application.getDoorText(doors.get(0)));
 
-        TextView secondDoorText = findViewById(R.id.second_door_text);
-        ImageButton secondDoor = findViewById(R.id.second_door);
-        secondDoor.setTag(doors.get(1));
-        secondDoorText.setText(application.getDoorText(doors.get(1)));
+        // ajout du contenu a chaque porte
+        addContentDoor(R.id.first_door, R.id.first_door_text, doors.get(0));
+        addContentDoor(R.id.second_door, R.id.second_door_text, doors.get(1));
     }
 
+    /**
+     * Action du clic sur une porte, lance la troisième vue
+     *
+     * @param view le bouton cliqué
+     */
     public void onDoorSelection(View view) {
         ImageButton porte = (ImageButton) view;
         String porteChoisie = porte.getTag().toString();
 
         Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("porte_choisie", Integer.valueOf(porteChoisie));
+        intent.putExtra(getString(R.string.choice), Integer.valueOf(porteChoisie));
         startActivity(intent);
-        finish();
+        finish(); // evite le retour arrière dans l'application
+    }
+
+    /**
+     * Permet de définir le contenu de chaque porte  lors du start de l'activité
+     *
+     * @param doorId     l'identifiant de l'élément ImageView de la porte
+     * @param doorTextId l'identifiant de l'élément TextView de la porte
+     * @param doorNumber le numéro de la porte
+     */
+    private void addContentDoor(int doorId, int doorTextId, int doorNumber) {
+        MontyHallApplication application = (MontyHallApplication) getApplication();
+
+        TextView doorText = findViewById(doorTextId);
+        ImageButton door = findViewById(doorId);
+        door.setTag(doorNumber);
+        doorText.setText(application.getDoorText(doorNumber));
+
+        if (doorNumber == getIntent().getIntExtra(getString(R.string.choice), 0)) {
+            door.setImageResource(R.drawable.door_open);
+        }
     }
 }
