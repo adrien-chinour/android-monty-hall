@@ -1,3 +1,21 @@
 <resources>
+    <!-- Application -->
     <string name="app_name">Monty Hall</string>
+
+    <string name="door_a">Porte A</string>
+    <string name="door_b">Porte B</string>
+    <string name="door_c">Porte C</string>
+
+    <!-- StartActivity -->
+    <string name="title_start_page">Une voiture est cachée derrière une de ces portes. Trouves la !</string>
+    <string name="button_a_propos">En savoir plus sur le problème de Monty Hall</string>
+    <string name="wikipedia_monty_hall">https://fr.wikipedia.org/wiki/Probl%C3%A8me_de_Monty_Hall</string>
+
+    <!-- ChoiceActivity -->
+    <string name="title_choice_page">Veux-tu garder ta porte ou changer de porte ?</string>
+
+    <!-- ResultActivity -->
+    <string name="result_replay">Rejouer</string>
+
+    <dimen name="title_size">20sp</dimen>
 </resources>
